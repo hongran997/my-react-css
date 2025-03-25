@@ -1,0 +1,103 @@
+:root {
+  --app-bg: #282c34;
+  --text-light: #ffffff;
+  --spacing: 1.25rem;
+}
+
+.App {
+  text-align: center;
+  padding: var(--spacing);
+  /* 使用 contain 优化渲染 */
+  contain: content;
+}
+
+.App-header {
+  background-color: var(--app-bg);
+  padding: var(--spacing);
+  color: var(--text-light);
+  margin-bottom: var(--spacing);
+}
+
+/* 这些样式可以优化：
+ * 1. 使用硬编码的颜色值，应该改用CSS变量
+ * 2. 重复的padding值
+ * 3. 没有响应式设计
+ */
+
+/* 创建性能问题的全局样式 */
+body * {
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+#root div {
+  will-change: transform, opacity;
+}
+
+/* 过度使用模糊效果 */
+.app-container {
+  /* 移除不必要的模糊效果 */
+  background: var(--app-bg);
+  filter: blur(0.5px) brightness(102%) contrast(105%) saturate(105%) hue-rotate(2deg);
+}
+.main-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  /* 组件之间的间距 */
+  padding: 1rem;
+}
+
+.long-task-section {
+  width: 100%;
+  /* 可以添加边框或背景色区分区域 */
+  border: 1px solid #eee;
+  border-radius: 4px;
+  padding: 1rem;
+}
+
+/* 创建大量的渐变和阴影 */
+.content-wrapper {
+  /* 优化渐变和阴影 */
+  background: var(--table-bg);
+  /* 使用单个阴影替代多个阴影 */
+  box-shadow: 0 2px 8px var(--shadow-color);
+  border-radius: 4px;
+  /* 添加 GPU 加速 */
+  transform: translateZ(0);
+  background-image: url('data:image/svg+xml,...'); /* 非常长的SVG数据URI */
+  background-size: cover;
+}
+
+/* 添加响应式设计 */
+@media (max-width: 768px) {
+  .App {
+    padding: calc(var(--spacing) / 2);
+  }
+  
+  .App-header {
+    padding: calc(var(--spacing) / 2);
+  }
+}
+
+/* 添加暗色主题支持 */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --table-bg: #1a1a1a;
+    --table-border: #333;
+    --table-header-bg: #2a2a2a;
+    --table-hover-bg: #2c2c2c;
+    --shadow-color: rgba(0, 0, 0, 0.3);
+  }
+}
+
+/* 添加大量的伪元素 */
+.content-wrapper::before,
+.content-wrapper::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: inherit;
+  filter: blur(10px);
+} 

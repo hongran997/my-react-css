@@ -1,0 +1,196 @@
+@import '../styles/variables.css' layer(variables);
+
+/* 使用 CSS 变量定义主题颜色和通用值 */
+:root {
+  --table-bg: #ffffff;
+  --table-border: #ddd;
+  --table-header-bg: #f5f5f5;
+  --table-hover-bg: #f8f8f8;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --spacing-unit: 1rem;
+  --computed-width: calc(100vw - 100px + 20px * 50 / 2 - 10px * 10);
+  --complex-shadow: 
+    0 0 2px rgba(0,0,0,0.1),
+    0 0 4px rgba(0,0,0,0.1),
+    0 0 8px rgba(0,0,0,0.1),
+    0 0 16px rgba(0,0,0,0.1),
+    0 0 32px rgba(0,0,0,0.1);
+}
+
+/* 添加大量的CSS自定义属性 */
+:root {
+  --color-1: #ff0000;
+  --color-2: #ff0001;
+  /* ... 继续添加数百个变量 */
+}
+
+.table-container {
+  margin: var(--spacing-unit);
+  overflow-x: auto;
+  /* 使用 contain 属性优化渲染范围 */
+  contain: content;
+  font-family: var(--font-family-main);
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--table-bg);
+  /* 使用更高效的 box-shadow */
+  box-shadow: 0 2px 4px var(--shadow-color);
+}
+
+.data-table th,
+.data-table td {
+  padding: var(--spacing-unit);
+  text-align: left;
+  border-bottom: 1px solid var(--table-border);
+}
+
+.data-table th {
+  background-color: var(--table-header-bg);
+  font-weight: 600;
+}
+
+/* 优化 hover 效果，避免重排 */
+.data-table tr {
+  transition: background-color 0.2s ease;
+}
+
+.data-table tr:hover {
+  background-color: var(--table-hover-bg);
+}
+
+/* 优化动画效果 */
+.data-cell {
+  position: relative;
+  /* 使用 transform 替代背景动画 */
+  transform: translateZ(0); /* 启用 GPU 加速 */
+}
+
+/* 使用更高效的加载动画 */
+.data-cell.loading {
+  position: relative;
+  overflow: hidden;
+}
+
+.data-cell.loading::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transform: translateX(-100%);
+  animation: shimmer 1.5s infinite;
+  will-change: transform;
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* 优化表格包装器 */
+.table-wrapper {
+  /* 移除过度的滤镜效果 */
+  background: var(--table-bg);
+  border-radius: 4px;
+}
+
+/* 优化单元格内容 */
+.cell-content {
+  padding: 0.5rem;
+}
+
+/* 添加响应式设计 */
+@media (max-width: 768px) {
+  .table-container {
+    margin: 0 0.5rem;
+  }
+  
+  .data-table th,
+  .data-table td {
+    padding: 0.75rem;
+  }
+}
+
+
+/* 使用深层嵌套和复杂选择器 */
+/* .div.data-table-container>div>table>tbody>tr>td>div>span { */
+.data-cell-content {
+  color: #333;
+}
+
+/* 过度使用通配符 */
+* {
+  transition: all 0.3s ease;
+}
+
+/* 创建大量重排重绘 */
+.data-row:hover * {
+  transform: scale(1.01);
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  border-radius: 4px;
+}
+
+/* 性能较差的动画 */
+@keyframes shimmer {
+  0% { background-position: -1000px 0; }
+  100% { background-position: 1000px 0; }
+}
+
+.data-cell {
+  /* position: relative;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite linear; */
+}
+
+/* 过度使用滤镜效果 */
+.table-wrapper {
+  backdrop-filter: blur(5px);
+  filter: drop-shadow(0 0 10px rgba(0,0,0,0.1));
+}
+
+/* 创建大量的重叠元素 */
+.cell-content {
+  position: relative;
+}
+
+.cell-content::before,
+.cell-content::after {
+  /* content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255,255,255,0.1);
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  border-radius: 4px; */
+}
+
+/* 添加复杂的选择器 */
+div.table-container > div > table > tbody > tr:nth-child(2n+1) > td:not(:last-child):hover ~ td {
+  background: var(--computed-width);
+  box-shadow: var(--complex-shadow);
+}
+
+
+/* 添加大量的关键帧动画 */
+@keyframes animation1 {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes animation2 {
+  from { scale: 1; }
+  to { scale: 1.5; }
+}

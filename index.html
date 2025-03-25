@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+  <meta name="theme-color" content="#000000" />
+  <!-- 添加阻塞渲染的资源 -->
+    <!-- <script async src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+    <!-- 添加大型CSS框架 -->
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"/> -->
+    <!-- 添加自定义字体 -->
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.4/dist/css/foundation.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/materialize-css@1.0.0/dist/css/materialize.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" rel="stylesheet"> -->
+    <!-- 添加一些自定义的大型CSS文件 -->
+    <!-- <link href="/large-unused-styles1.css" rel="stylesheet"> -->
+  <title>React App</title>
+  <!-- 使用 media 查询优化加载 -->
+  <!-- <link rel="stylesheet" href="non-critical.css" media="print" onload="this.media='all'"> -->
+
+  <!-- 使用 preload 预加载重要资源 -->
+  <link rel="preload" href="src/critical.css" as="style">
+
+  <!-- 
+    font-display: swap 的工作流程：
+    1. 浏览器会首先尝试加载字体文件，如果字体文件未加载完成，浏览器会显示一个默认字体。
+    2. 当字体文件加载完成后，浏览器会使用新字体替换默认字体。
+    3. 如果字体文件加载失败，浏览器会继续使用默认字体。
+   -->
+  <style>
+
+    @font-face {
+      font-family: 'CustomFont';
+      src: url('/fonts/custom-font.woff2') format('woff2');
+      font-display: swap; 
+    }
+    
+  </style>
+</head>
+
+<body>
+  <noscript> You need to enable JavaScript to run this app. </noscript>
+  <div id="root"></div>
+  <script type="module" src="/src/index.tsx"></script>
+  <script >
+    requestIdleCallback(() => {
+      // 首屏渲染完成后执行, 加载performance相关代码
+      import('/src/services/performance.js').then(module => {
+        // console.log(module);
+      });
+      
+    });
+  </script>
+</script>
+</body>
+
+</html>

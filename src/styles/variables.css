@@ -1,0 +1,18 @@
+/* CSS变量定义层 */
+@layer variables {
+  :root {
+    /* 基础颜色 */
+    --primary-color: #333;
+    --secondary-color: #666;
+    --background-color: #fff;
+    
+    /* 间距 */
+    --spacing-unit: 1rem;
+    --spacing-small: 0.5rem;
+    --spacing-large: 2rem;
+    
+    /* 字体 */
+    --font-size-base: 16px;
+    --font-family-main: system-ui, -apple-system, sans-serif;
+  }
+} 
